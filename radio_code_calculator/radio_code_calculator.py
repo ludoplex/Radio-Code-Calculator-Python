@@ -293,15 +293,7 @@ class RadioCodeCalculator(object):
             response = requests.post(self.API_URL, data=params_array)
 
             # no response at all or an invalid response code
-            if not response or not response.ok:
-                return default_error
-
-            # decode to json array
-            result = response.json()
-
-            # return original JSON response code
-            return result
-
+            return default_error if not response or not response.ok else response.json()
         except Exception as ex:
 
             return default_error
